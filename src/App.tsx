@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Controls from "./components/Controls";
 import { GAME_SETTINGS } from "./constans/gameConstans";
 import GameStats from "./components/GameStats";
 import WordList from "./components/WordList";
 import Board from "./components/Board";
 import { generateBoard } from "./utilities/boardUtils";
+import { calculateWordListScore } from "./utilities/scoring";
 
 function App() {
   const [gameActive, setGameActive] = useState<boolean>(false);
@@ -35,9 +36,9 @@ function App() {
   };
 
   const resetGame = () => {
-    // endGame();
+    endGame();
     initializeGame();
-    // startGame();
+    startGame();
   };
 
   const handleWordFound = (word: string) => {
@@ -51,6 +52,12 @@ function App() {
 
     setFoundWords((prev) => [...prev, word]);
   };
+
+  useEffect(() => {
+    const newScore = calculateWordListScore(foundWords);
+    setScore(newScore);
+  }, [foundWords]);
+
   return (
     <div className="min-h-screen h-[100vh]  bg-gradient-to-b from-indigo-50 to-slate-100 text-slate-900">
       <main className="container  mx-auto px-4 py-8">

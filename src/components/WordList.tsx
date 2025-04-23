@@ -1,8 +1,5 @@
-interface WordListProps {
-  words: string[];
-  totalScore: number;
-}
 import { calculateWordScore } from "../utilities/scoring";
+import { WordListProps } from "../types";
 
 /**
  * WordList component displays a sortable list of found words with their scores

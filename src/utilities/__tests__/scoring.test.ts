@@ -3,10 +3,8 @@ import {
   calculateWordScore,
   calculateWordListScore,
   multipleWordLists,
-  MultipleWordLists,
-  MultipleListWordScore,
 } from "../scoring";
-
+import { MultipleWordLists, MultipleListWordScore } from "../../types";
 describe("calculateWordScore", () => {
   it("should return 0 for words less than 3 characters", () => {
     expect(calculateWordScore("")).toBe(0);

@@ -1,16 +1,4 @@
-export type WordScore = {
-  word: string;
-  score: number;
-};
-export type MultipleWordLists = {
-  name: string;
-  list: string[];
-};
-
-export type MultipleListWordScore = {
-  name: string;
-  score: number;
-};
+import { MultipleWordLists, MultipleListWordScore } from "../types";
 /**
  * Calculates the score for a single word based on its length
  * @param word The word to score

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-interface TimerProps {
-  initialSeconds: number;
-  isActive: boolean;
-  timeUp: () => void;
-}
-
+import { TimerProps } from "../types";
 /**
  * Timer component that displays a countdown with visual progress indicator
  *

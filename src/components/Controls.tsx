@@ -1,15 +1,6 @@
 import React from "react";
 import Timer from "./Timer";
-
-interface ControlsProps {
-  gameActive: boolean;
-  onStart: () => void;
-  timerSeconds: number;
-  onEndGame: () => void;
-  initialSeconds: number;
-  onTimerChange: (seconds: number) => void;
-}
-
+import { type ControlsProps } from "../types";
 /**
  * Controls component for a timed game interface
  *

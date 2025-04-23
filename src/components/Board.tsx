@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import Die from "./Die";
 import { isValidPath, getWordFromPath } from "../utilities/boardUtils";
 import { GAME_SETTINGS } from "../constans/gameConstans";
-
-interface BoardProps {
-  board: string[][];
-  onWordFound: (word: string) => void;
-  gameActive: boolean;
-}
-
+import { BoardProps } from "../types";
 /**
  * Board component manages the interactive word game grid
  *

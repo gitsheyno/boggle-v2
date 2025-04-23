@@ -1,7 +1,4 @@
-interface GameStatsProps {
-  words: string[];
-  score: number;
-}
+import { GameStatsProps } from "../types";
 
 /**
  * GameStats component displays game performance metrics

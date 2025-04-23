@@ -6,10 +6,9 @@ describe("Controls", () => {
   const defaultProps = {
     gameActive: false,
     onStart: vi.fn(),
-    onReset: vi.fn(),
     timerSeconds: 120,
     onTimerChange: vi.fn(),
-    onTimeUp: vi.fn(),
+    onEndGame: vi.fn(),
     initialSeconds: 120,
   };
 
@@ -32,7 +31,7 @@ describe("Controls", () => {
   it("calls onReset when End Game is clicked", () => {
     render(<Controls {...defaultProps} gameActive={true} />);
     fireEvent.click(screen.getByText(/end game/i));
-    expect(defaultProps.onReset).toHaveBeenCalled();
+    expect(defaultProps.onEndGame).toHaveBeenCalled();
   });
 
   it("renders timer options and highlights selected one", () => {

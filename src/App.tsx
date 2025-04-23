@@ -3,15 +3,26 @@ import Controls from "./components/Controls";
 import { GAME_SETTINGS } from "./constans/gameConstans";
 import GameStats from "./components/GameStats";
 import WordList from "./components/WordList";
+import Board from "./components/Board";
+import { generateBoard } from "./utilities/boardUtils";
 
 function App() {
   const [gameActive, setGameActive] = useState<boolean>(false);
   const [timerSeconds, setTimerSeconds] = useState<number>(
     GAME_SETTINGS.DEFAULT_TIMER
   );
+  const [board, setBoard] = useState<string[][]>(generateBoard());
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [foundWords, setFoundWords] = useState<string[]>([]);
   const [score, setScore] = useState<number>(0);
+
+  const initializeGame = () => {
+    setBoard(generateBoard());
+    setFoundWords([]);
+    setScore(0);
+    setGameActive(false);
+    setGameOver(false);
+  };
 
   const startGame = () => {
     setGameActive(true);
@@ -24,7 +35,21 @@ function App() {
   };
 
   const resetGame = () => {
-    endGame();
+    // endGame();
+    initializeGame();
+    // startGame();
+  };
+
+  const handleWordFound = (word: string) => {
+    if (!gameActive) return;
+
+    const lowerWord = word.toLowerCase();
+
+    if (foundWords.some((w) => w.toLowerCase() === lowerWord)) {
+      return;
+    }
+
+    setFoundWords((prev) => [...prev, word]);
   };
   return (
     <div className="min-h-screen h-[100vh]  bg-gradient-to-b from-indigo-50 to-slate-100 text-slate-900">
@@ -33,14 +58,20 @@ function App() {
           <Controls
             gameActive={gameActive}
             onStart={startGame}
-            onReset={resetGame}
             timerSeconds={timerSeconds}
             onTimerChange={setTimerSeconds}
-            onTimeUp={endGame}
+            onEndGame={endGame}
             initialSeconds={timerSeconds}
           />
 
           <div className="flex items-end   gap-8 w-full max-w-4xl">
+            <div className="flex justify-center flex-1">
+              <Board
+                board={board}
+                onWordFound={handleWordFound}
+                gameActive={gameActive}
+              />
+            </div>
             {!gameOver ? (
               <div className="flex justify-center flex-1 h-[420px]">
                 <WordList words={foundWords} totalScore={score} />

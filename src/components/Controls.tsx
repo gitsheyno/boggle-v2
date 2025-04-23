@@ -4,9 +4,8 @@ import Timer from "./Timer";
 interface ControlsProps {
   gameActive: boolean;
   onStart: () => void;
-  onReset: () => void;
   timerSeconds: number;
-  onTimeUp: () => void;
+  onEndGame: () => void;
   initialSeconds: number;
   onTimerChange: (seconds: number) => void;
 }
@@ -21,10 +20,9 @@ interface ControlsProps {
 const Controls: React.FC<ControlsProps> = ({
   gameActive,
   onStart,
-  onReset,
   timerSeconds,
   onTimerChange,
-  onTimeUp,
+  onEndGame,
 }) => {
   const timerOptions = [
     { label: "1 min", value: 60 },
@@ -45,7 +43,7 @@ const Controls: React.FC<ControlsProps> = ({
           </button>
         ) : (
           <button
-            onClick={onReset}
+            onClick={onEndGame}
             className="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-medium rounded-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           >
             End Game
@@ -77,7 +75,7 @@ const Controls: React.FC<ControlsProps> = ({
         <Timer
           initialSeconds={timerSeconds}
           isActive={gameActive}
-          timeUp={onTimeUp}
+          timeUp={onEndGame}
         />
       )}
     </div>

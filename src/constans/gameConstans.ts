@@ -1,0 +1,5 @@
+export const GAME_SETTINGS = {
+  DEFAULT_TIMER: 180,
+  BOARD_SIZE: 4,
+  MIN_WORD_LENGTH: 3,
+};

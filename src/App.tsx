@@ -26,6 +26,7 @@ function App() {
   };
 
   const startGame = () => {
+    setFoundWords([]);
     setGameActive(true);
     setGameOver(false);
   };

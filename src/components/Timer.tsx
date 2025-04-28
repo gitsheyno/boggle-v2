@@ -54,7 +54,7 @@ const Timer: React.FC<TimerProps> = ({ initialSeconds, isActive, timeUp }) => {
   };
 
   return (
-    <div className="w-full max-w-md">
+    <div data-testid="timer" className="w-full max-w-md">
       <div className="flex items-center justify-between mb-1">
         <span className="text-sm font-medium text-slate-600">
           Time Remaining

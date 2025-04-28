@@ -1,6 +1,4 @@
-export type ControlsProps = {
-  gameActive: boolean;
-  onEndGame: () => void;
+export type GameConfigTypes = {
   handleModeSelection: (
     mode: "single" | "multi" | "ai",
     playerName: string[]

@@ -1,4 +1,3 @@
 export type WordListProps = {
-  words: string[];
-  totalScore: number;
+  players: { name: string; foundedWords: string[]; score: number }[];
 };

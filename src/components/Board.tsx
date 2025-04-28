@@ -30,6 +30,7 @@ const Board: React.FC<BoardProps> = ({ board, onWordFound, gameActive }) => {
   useEffect(() => {
     if (selectedPath.length > 0) {
       const word = getWordFromPath(board, selectedPath);
+      console.log("word", word);
       setCurrentWord(word);
     } else {
       setCurrentWord("");
@@ -37,6 +38,7 @@ const Board: React.FC<BoardProps> = ({ board, onWordFound, gameActive }) => {
   }, [selectedPath, board]);
 
   const handleDieMouseDown = (row: number, col: number) => {
+    console.log("clicked");
     if (!gameActive) return;
     setIsSelecting(true);
     setSelectedPath([[row, col]]);
@@ -46,6 +48,7 @@ const Board: React.FC<BoardProps> = ({ board, onWordFound, gameActive }) => {
     if (!isSelecting || !gameActive) return;
     if (selectedPath.length > 0) {
       const lastPos = selectedPath[selectedPath.length - 1];
+
       const rowDiff = Math.abs(lastPos[0] - row);
       const colDiff = Math.abs(lastPos[1] - col);
       const isAlreadySelected = selectedPath.some(
@@ -62,6 +65,7 @@ const Board: React.FC<BoardProps> = ({ board, onWordFound, gameActive }) => {
 
       if (isAlreadySelected && selectedPath.length > 1) {
         const secondToLastPos = selectedPath[selectedPath.length - 2];
+        console.log(secondToLastPos);
         if (secondToLastPos[0] === row && secondToLastPos[1] === col) {
           setSelectedPath(selectedPath.slice(0, -1));
         }
@@ -105,7 +109,10 @@ const Board: React.FC<BoardProps> = ({ board, onWordFound, gameActive }) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 select-none">
+    <div
+      data-testid="board"
+      className="flex flex-col items-center gap-4 select-none"
+    >
       <div className="h-10 flex items-center justify-center">
         {currentWord ? (
           <div className="bg-indigo-100 px-4 py-2 rounded-full text-indigo-800 font-medium text-lg animate-pulse">

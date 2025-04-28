@@ -21,12 +21,6 @@ export function calculateWordScore(word: string): number {
  * @returns score of the word list
  */
 export function calculateWordListScore(wordList: string[]): number {
-  const x = wordList.map((word) => ({
-    word,
-    score: calculateWordScore(word),
-  }));
-
-  console.log(x);
   return wordList
     .map((word) => ({
       word,

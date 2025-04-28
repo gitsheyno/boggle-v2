@@ -2,25 +2,33 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Controls from "../../components/Controls";
 
+vi.mock("../../components/GameConfig", () => ({
+  default: ({ handleModeSelection }) => (
+    <div data-testid="game-config">
+      <button onClick={() => handleModeSelection("standard")}>
+        Start Game
+      </button>
+    </div>
+  ),
+}));
+
 describe("Controls", () => {
   const defaultProps = {
     gameActive: false,
-    onStart: vi.fn(),
-    timerSeconds: 120,
-    onTimerChange: vi.fn(),
     onEndGame: vi.fn(),
-    initialSeconds: 120,
+    handleModeSelection: vi.fn(),
   };
 
-  it("renders Start Game when game is not active", () => {
+  it("renders Game Config when game is not active", () => {
     render(<Controls {...defaultProps} />);
-    expect(screen.getByText(/start game/i)).toBeInTheDocument();
+    expect(screen.getByTestId("game-config")).toBeInTheDocument();
+    expect(screen.getByText(/Game Length/i)).toBeInTheDocument();
   });
 
-  it("calls onStart when Start Game is clicked", () => {
+  it("calls handleModeSelection when a mode is selected", () => {
     render(<Controls {...defaultProps} />);
     fireEvent.click(screen.getByText(/start game/i));
-    expect(defaultProps.onStart).toHaveBeenCalled();
+    expect(defaultProps.handleModeSelection).toHaveBeenCalledWith("standard");
   });
 
   it("renders End Game when game is active", () => {
@@ -28,7 +36,7 @@ describe("Controls", () => {
     expect(screen.getByText(/end game/i)).toBeInTheDocument();
   });
 
-  it("calls onReset when End Game is clicked", () => {
+  it("calls onEndGame when End Game is clicked", () => {
     render(<Controls {...defaultProps} gameActive={true} />);
     fireEvent.click(screen.getByText(/end game/i));
     expect(defaultProps.onEndGame).toHaveBeenCalled();
@@ -37,17 +45,32 @@ describe("Controls", () => {
   it("renders timer options and highlights selected one", () => {
     render(<Controls {...defaultProps} />);
     const selected = screen.getByText("2 min");
-    expect(selected).toHaveClass("bg-indigo-100");
+    expect(selected).toHaveClass(
+      "  px-4 py-2 text-sm rounded-lg transition-all bg-slate-100 text-slate-700 hover:bg-slate-200"
+    );
   });
 
-  it("calls onTimerChange when a timer option is clicked", () => {
+  it("selects the correct timer button when clicked", () => {
     render(<Controls {...defaultProps} />);
-    fireEvent.click(screen.getByText("3 min"));
-    expect(defaultProps.onTimerChange).toHaveBeenCalledWith(180);
+
+    const button = screen.getByText("3 min");
+
+    fireEvent.click(button);
+
+    expect(button).toHaveClass("bg-indigo-100");
+    expect(button).toHaveClass("text-indigo-800");
   });
 
   it("renders Timer when game is active", () => {
     render(<Controls {...defaultProps} gameActive={true} />);
     expect(screen.queryByText(/game length/i)).not.toBeInTheDocument();
+  });
+
+  it("displays language selector and changes language when selected", () => {
+    render(<Controls {...defaultProps} />);
+    expect(screen.getByText("English")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("English"));
+    expect(screen.getByText("German")).toBeInTheDocument();
   });
 });

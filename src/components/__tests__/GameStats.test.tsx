@@ -10,7 +10,7 @@ describe("GameStats", () => {
       />
     );
     expect(screen.getByText("42")).toBeInTheDocument();
-    expect(screen.getByText(/total score/i)).toBeInTheDocument();
+    expect(screen.getByText(/score/i)).toBeInTheDocument();
   });
 
   it("renders number of words found", () => {
@@ -26,7 +26,7 @@ describe("GameStats", () => {
       />
     );
     expect(screen.getByText("3")).toBeInTheDocument();
-    expect(screen.getByText(/words found/i)).toBeInTheDocument();
+    expect(screen.getByText(/words/i)).toBeInTheDocument();
   });
 
   it("displays the longest word", () => {
@@ -41,7 +41,7 @@ describe("GameStats", () => {
         ]}
       />
     );
-    expect(screen.getByText(/longest word/i)).toBeInTheDocument();
+    expect(screen.getByText(/longestword/i)).toBeInTheDocument();
     expect(screen.getByText("elephant")).toBeInTheDocument();
   });
 
@@ -49,6 +49,6 @@ describe("GameStats", () => {
     render(
       <GameStats players={[{ name: "Player 1", score: 0, foundedWords: [] }]} />
     );
-    expect(screen.getByText(/longest word/i)).toBeInTheDocument();
+    expect(screen.getByText(/longestword/i)).toBeInTheDocument();
   });
 });

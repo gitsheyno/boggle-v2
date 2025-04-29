@@ -63,21 +63,26 @@ const WordList: React.FC<WordListProps> = ({ players }: WordListProps) => {
   return (
     <div
       data-testid="word-list"
-      className="bg-white rounded-2xl shadow-lg p-5 md:p-6 w-full flex flex-col border border-slate-100"
+      className="bg-white rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 w-full flex flex-col border gap-4 border-slate-100"
     >
-      {players.map((player) => (
-        <div className="flex flex-col justify-between h-[250px] overflow-scroll">
-          <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
-            <h2 className="text-xl font-bold text-slate-800">{player.name}</h2>
-            <div className="text-xl font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg">
+      {players.map((player, index) => (
+        <div
+          key={player.name + index}
+          className="flex flex-col justify-between h-[200px] sm:h-[250px] overflow-hidden"
+        >
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-slate-100">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-2 sm:mb-0">
+              {player.name}
+            </h2>
+            <div className="text-base sm:text-lg md:text-xl font-bold text-indigo-600 bg-indigo-50 px-2 sm:px-3 py-1 rounded-lg whitespace-nowrap">
               {t("playerScore")} {player.score} pts
             </div>
           </div>
           {player.foundedWords.length === 0 ? (
-            <div className="flex-grow flex flex-col items-center justify-center text-slate-400 space-y-3 py-12">
+            <div className="flex-grow flex flex-col items-center justify-center text-slate-400 space-y-3 py-8 sm:py-12">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-12 w-12 text-slate-300"
+                className="h-8 w-8 sm:h-12 sm:w-12 text-slate-300"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -89,54 +94,58 @@ const WordList: React.FC<WordListProps> = ({ players }: WordListProps) => {
                   d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
                 />
               </svg>
-              <p className="italic">{t("Nowordsfoundyet")}...</p>
+              <p className="italic text-sm sm:text-base">
+                {t("Nowordsfoundyet")}...
+              </p>
             </div>
           ) : (
             <div className="flex-grow overflow-y-auto pr-2 custom-scrollbar">
-              <table className="w-full">
-                <thead className="text-left text-slate-500 sticky top-0 bg-white">
-                  <tr>
-                    <th className="pb-2 font-medium">{t("word")}</th>
-                    <th className="pb-2 font-medium text-right">
-                      {t("point")}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
+              <div className="min-w-full">
+                <div className="grid grid-cols-2 text-left text-slate-500 sticky top-0 bg-white">
+                  <div className="pb-2 font-medium text-sm sm:text-base">
+                    {t("word")}
+                  </div>
+                  <div className="pb-2 font-medium text-right text-sm sm:text-base">
+                    {t("point")}
+                  </div>
+                </div>
+                <div className="space-y-1">
                   {player.foundedWords.map((word, index) => (
-                    <tr
+                    <div
                       key={index}
-                      className="border-b border-slate-100 hover:bg-slate-50 transition-colors"
+                      className="grid grid-cols-2 border-b border-slate-100 hover:bg-slate-50 transition-colors"
                     >
-                      <td className="py-2.5 font-medium text-slate-700">
-                        {word}
+                      <div className="py-2 font-medium text-slate-700 text-sm sm:text-base flex items-center">
+                        <span className="truncate">{word}</span>
                         {word.length >= 8 && (
-                          <span className="ml-2 text-xs px-2 py-0.5 bg-amber-100 text-amber-800 rounded-full">
-                            Great!
+                          <span className="ml-1 sm:ml-2 text-xs px-1 sm:px-2 py-0.5 bg-amber-100 text-amber-800 rounded-full whitespace-nowrap">
+                            {t("Great")}
                           </span>
                         )}
                         {word.length === 7 && (
-                          <span className="ml-2 text-xs px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded-full">
-                            Good!
+                          <span className="ml-1 sm:ml-2 text-xs px-1 sm:px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded-full whitespace-nowrap">
+                            {t("Good")}
                           </span>
                         )}
-                      </td>
-                      <td className="py-2.5 text-right text-indigo-600 font-medium">
+                      </div>
+                      <div className="py-2 text-right text-indigo-600 font-medium text-sm sm:text-base">
                         +{calculateWordScore(word)}
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                   ))}
-                </tbody>
-              </table>
+                </div>
+              </div>
             </div>
           )}
           {player.foundedWords.length > 0 && (
-            <div className="pt-3 mt-3 border-t border-slate-100 text-sm text-slate-500 flex justify-between">
-              <span>Total Words: {player.foundedWords.length}</span>
+            <div className="pt-2 sm:pt-3 mt-2 sm:mt-3 border-t border-slate-100 text-xs sm:text-sm text-slate-500 flex flex-col sm:flex-row justify-between">
+              <span className="mb-1 sm:mb-0 text-xs">
+                {t("totalWords")}: {player.foundedWords.length}
+              </span>
               <span>
-                Avg Points:{" "}
-                {(player.score / player.foundedWords.length).toFixed(1)} per
-                word
+                {t("AvgPoints")}:
+                {(player.score / player.foundedWords.length).toFixed(1)}{" "}
+                {t("perWords")}
               </span>
             </div>
           )}

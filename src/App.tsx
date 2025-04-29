@@ -1,4 +1,4 @@
-// App.tsx with Modal Implementation
+// App.tsx with Modal Implementation - Responsive Version
 
 import { useState } from "react";
 import Controls from "./components/Controls";
@@ -89,38 +89,42 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen h-screen bg-gradient-to-b from-indigo-50 to-slate-100 text-slate-900">
-      <main className="container mx-auto px-4 py-8">
-        <div className="flex flex-col items-center gap-8">
+    <div className="min-h-screen h-screen bg-gradient-to-b from-indigo-50 to-slate-100 text-slate-900 overflow-y-auto">
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+        <div className="flex flex-col items-center gap-4 sm:gap-8">
           <Controls
             handleModeSelection={handleModeSelection}
             gameActive={gameActive}
             onEndGame={endGame}
           />
-          <div className="flex items-end gap-8 w-full max-w-4xl">
-            <div className="flex justify-center flex-1">
+
+          <div className="flex flex-col md:flex-row items-center md:items-start w-full max-w-4xl gap-6 md:gap-8  p-3 sm:p-4 rounded-lg bg-white/50">
+            <div className="w-full md:w-1/2 flex justify-center">
               <Board
                 board={board}
                 onWordFound={handleWordFound}
                 gameActive={gameActive}
               />
             </div>
-            {!gameOver ? (
-              <div className="flex justify-center flex-1 ">
-                <WordList players={players} data-testid="word-list" />
-              </div>
-            ) : (
-              <div className="mt-6 w-full max-w-lg flex-1">
-                <div className="bg-white  rounded-2xl shadow-xl p-6 border border-indigo-100">
-                  <GameStats players={players} />
-                  <div className="mt-6 flex flex-col justify-center gap-3">
-                    <h2 className="text-2xl font-bold text-center text-red-500">
-                      {t("gameOver")}
-                    </h2>
+
+            <div className="w-full md:w-1/2">
+              {!gameOver ? (
+                <div className="flex justify-center w-full">
+                  <WordList players={players} data-testid="word-list" />
+                </div>
+              ) : (
+                <div className="w-full">
+                  <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 border border-indigo-100">
+                    <GameStats players={players} />
+                    <div className="mt-4 sm:mt-6 flex flex-col justify-center gap-3">
+                      <h2 className="text-xl sm:text-2xl font-bold text-center text-red-500">
+                        {t("gameOver")}
+                      </h2>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </main>

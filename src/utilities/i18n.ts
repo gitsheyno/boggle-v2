@@ -26,10 +26,16 @@ const resources = {
       playAgain: "Play Again",
       gameOver: "Game Over!",
       playerScore: "Player Score",
-      totalWords: "Total Words",
+      totalWords: "Words",
       Nowordsfoundyet: "No words found yet",
       word: "Word",
       point: "Point",
+      longestWord: "Longest Word",
+      totalScore: "Score",
+      Great: "Great",
+      Good: "Good",
+      perWords: "per word",
+      AvgPoints: "Average Points",
 
       // SingleModeForm texts
       singlePlayerSetup: "Single Player Setup",
@@ -64,10 +70,16 @@ const resources = {
       playAgain: "Nochmal spielen",
       gameOver: "Spiel vorbei!",
       playerScore: "spieler Punkte",
-      totalWords: "Wörter gesamt",
+      totalWords: "Wörter",
       Nowordsfoundyet: "Noch keine Wörter gefunden",
       word: "Wort",
       point: "Punkt",
+      longestWord: "Längstes Wort",
+      totalScore: "punktzahl",
+      Great: "Toll!",
+      Good: "Gut",
+      perWords: "pro Wort",
+      AvgPoints: "Durchschnittliche Punkte",
 
       // SingleModeForm texts
       singlePlayerSetup: "Einzelspieler-Setup",
@@ -82,13 +94,12 @@ const resources = {
   },
 };
 
-// Initialize i18n
 i18n.use(initReactI18next).init({
   resources,
-  lng: "EN", // default language
+  lng: "EN",
   fallbackLng: "EN",
   interpolation: {
-    escapeValue: false, // React already escapes values
+    escapeValue: false,
   },
 });
 

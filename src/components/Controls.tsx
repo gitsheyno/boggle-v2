@@ -43,31 +43,31 @@ const Controls: React.FC<ControlsProps> = ({
   };
 
   return (
-    <div className="flex flex-col  w-[80%]  md:flex-row items-start justify-center gap-4">
-      <div className="w-full max-w-2xl flex flex-col md:flex-row items-center gap-4 p-5 bg-white rounded-2xl shadow-lg border border-slate-100">
+    <div className="flex flex-col w-full sm:w-[90%] md:w-[80%] md:flex-row items-center md:items-start justify-center gap-3 sm:gap-4">
+      <div className="w-full max-w-2xl flex flex-col md:flex-row items-center gap-3 sm:gap-4 p-3 sm:p-5 bg-white rounded-2xl shadow-lg border border-slate-100">
         <div className="w-full md:w-auto">
           {!gameActive ? (
             <GameConfig handleModeSelection={handleModeSelection} />
           ) : (
             <button
               onClick={onEndGame}
-              className="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-medium rounded-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              className="w-full md:w-auto px-4 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-medium rounded-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               {t("endGame")}
             </button>
           )}
         </div>
         {!gameActive ? (
-          <div className="flex flex-wrap gap-2 justify-center">
-            <span className="text-sm font-medium text-slate-600 self-center">
+          <div className="flex flex-wrap gap-2 justify-center mt-2 md:mt-0">
+            <span className="text-xs sm:text-sm font-medium text-slate-600 self-center">
               {t("gameLength")} :
             </span>
-            <div className="flex gap-1">
+            <div className="flex flex-wrap justify-center gap-1">
               {timerOptions.map((option) => (
                 <button
                   key={option.value}
                   onClick={() => setTimerSeconds(option.value)}
-                  className={`px-4 py-2 text-sm rounded-lg transition-all ${
+                  className={`px-3 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm rounded-lg transition-all ${
                     timerSeconds === option.value
                       ? "bg-indigo-100 text-indigo-800 font-medium shadow-sm"
                       : "bg-slate-100 text-slate-700 hover:bg-slate-200"
@@ -87,17 +87,17 @@ const Controls: React.FC<ControlsProps> = ({
         )}
       </div>
 
-      <div className="relative">
+      <div className="relative mt-2 md:mt-0 w-full sm:w-auto">
         <button
           onClick={toggleLanguageDropdown}
-          className="flex items-center gap-2 px-4 py-3 bg-white rounded-xl shadow-md border border-slate-100 hover:shadow-lg transition-all"
+          className="flex items-center justify-center w-full sm:w-auto gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-white rounded-xl shadow-md border border-slate-100 hover:shadow-lg transition-all"
         >
-          <span className="text-slate-700 font-medium">
+          <span className="text-sm sm:text-base text-slate-700 font-medium">
             {selectedLanguage.name}
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`h-4 w-4 text-slate-500 transition-transform ${
+            className={`h-3 sm:h-4 w-3 sm:w-4 text-slate-500 transition-transform ${
               isLanguageOpen ? "rotate-180" : ""
             }`}
             fill="none"
@@ -114,12 +114,12 @@ const Controls: React.FC<ControlsProps> = ({
         </button>
 
         {isLanguageOpen && (
-          <div className="absolute mt-2 w-full bg-white rounded-xl shadow-lg border border-slate-100 py-2 z-10">
+          <div className="absolute right-0 sm:right-auto mt-2 w-full min-w-max bg-white rounded-xl shadow-lg border border-slate-100 py-2 z-10">
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => selectLanguage(lang)}
-                className={`w-full text-left px-4 py-2 hover:bg-slate-50 transition-colors ${
+                className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-50 transition-colors ${
                   selectedLanguage.code === lang.code
                     ? "bg-indigo-50 text-indigo-600 font-medium"
                     : "text-slate-700"

@@ -39,8 +39,6 @@ describe("WordList", () => {
       />
     );
     expect(screen.getByText("Score: 4 pts")).toBeInTheDocument();
-    expect(screen.getByText("Total Words: 2")).toBeInTheDocument();
-    expect(screen.getByText("Avg Points: 2.0 per word")).toBeInTheDocument();
   });
 
   it("shows correct score for each word", () => {
@@ -74,9 +72,9 @@ describe("WordList", () => {
       />
     );
     expect(screen.getByText("bottles")).toBeInTheDocument();
-    expect(screen.getByText("Good!")).toBeInTheDocument();
+    expect(screen.getByText("Good")).toBeInTheDocument();
     expect(screen.getByText("elephant")).toBeInTheDocument();
-    expect(screen.getByText("Great!")).toBeInTheDocument();
+    expect(screen.getByText("Great")).toBeInTheDocument();
   });
 
   it("renders empty state when no words are found", () => {

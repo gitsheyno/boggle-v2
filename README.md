@@ -75,14 +75,6 @@ npm install
 - Tailwind CSS for styling
 - ESLint for code quality
 
-## Additional Features (Partially Implemented)
-
-Solutions for the following features have been designed and partially implemented, but required additional development time to complete:
-
-- Multi-language support - (I have a Solution ready but needed 1 more day to implementation)
-- Multiplayer functionality - (I have a Solution ready but needed 1 more day to implementation)
-- Dictionary validation for words -
-- Additional game modes - (I have a Solution ready but needed 1 more day to implementation)
 
 ## Testing
 

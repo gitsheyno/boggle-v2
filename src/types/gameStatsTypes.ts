@@ -1,4 +1,3 @@
 export interface GameStatsProps {
-  words: string[];
-  score: number;
+  players: { name: string; foundedWords: string[]; score: number }[];
 }

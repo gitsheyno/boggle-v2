@@ -1,20 +1,17 @@
-import { DICE, SPECIAL_LETTERS } from "../constans/gameConstans";
+import { DICE, SPECIAL_LETTERS, GAME_SETTINGS } from "../constans/gameConstans";
 
 /**
  * Generates a random Boggle board using the official dice distribution
  * @returns A 2D array representing the Boggle board
  */
 export function generateBoard(): string[][] {
-  // Shuffle the dice
   const shuffledDice = [...DICE].sort(() => Math.random() - 0.5);
 
-  // Create a 4x4 board
   const board: string[][] = [];
-
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < GAME_SETTINGS.BOARD_SIZE; i++) {
     const row: string[] = [];
-    for (let j = 0; j < 4; j++) {
-      const dieIndex = i * 4 + j;
+    for (let j = 0; j < GAME_SETTINGS.BOARD_SIZE; j++) {
+      const dieIndex = i * GAME_SETTINGS.BOARD_SIZE + j;
       const die = shuffledDice[dieIndex];
       // Randomly select one face of the die (0-5)
       const faceIndex = Math.floor(Math.random() * 6);
@@ -86,37 +83,4 @@ export function getWordFromPath(
   path: [number, number][]
 ): string {
   return path.map(([row, col]) => board[row][col]).join("");
-}
-
-/**
- * Gets all possible adjacent positions to a given position
- * @param row Row index
- * @param col Column index
- * @param boardSize Size of the board (default 4)
- * @returns Array of adjacent positions
- */
-export function getAdjacentPositions(
-  row: number,
-  col: number,
-  boardSize: number = 4
-): [number, number][] {
-  const adjacent: [number, number][] = [];
-
-  for (
-    let r = Math.max(0, row - 1);
-    r <= Math.min(boardSize - 1, row + 1);
-    r++
-  ) {
-    for (
-      let c = Math.max(0, col - 1);
-      c <= Math.min(boardSize - 1, col + 1);
-      c++
-    ) {
-      if (r !== row || c !== col) {
-        adjacent.push([r, c]);
-      }
-    }
-  }
-
-  return adjacent;
 }

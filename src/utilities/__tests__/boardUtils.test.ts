@@ -4,7 +4,6 @@ import {
   areAdjacent,
   isValidPath,
   getWordFromPath,
-  getAdjacentPositions,
 } from "../../utilities/boardUtils";
 import { DICE } from "../../constans/gameConstans";
 
@@ -86,28 +85,5 @@ describe("getWordFromPath", () => {
       [1, 1],
     ];
     expect(getWordFromPath(board, path)).toBe("QuF");
-  });
-});
-
-describe("getAdjacentPositions", () => {
-  it("should return all adjacent positions for a center position", () => {
-    const adjacentPositions = getAdjacentPositions(1, 1);
-    expect(adjacentPositions.length).toBe(8);
-    expect(adjacentPositions).toContainEqual([0, 0]);
-    expect(adjacentPositions).toContainEqual([0, 1]);
-    expect(adjacentPositions).toContainEqual([0, 2]);
-    expect(adjacentPositions).toContainEqual([1, 0]);
-    expect(adjacentPositions).toContainEqual([1, 2]);
-    expect(adjacentPositions).toContainEqual([2, 0]);
-    expect(adjacentPositions).toContainEqual([2, 1]);
-    expect(adjacentPositions).toContainEqual([2, 2]);
-  });
-
-  it("should return fewer positions for a corner position", () => {
-    const adjacentPositions = getAdjacentPositions(0, 0);
-    expect(adjacentPositions.length).toBe(3);
-    expect(adjacentPositions).toContainEqual([0, 1]);
-    expect(adjacentPositions).toContainEqual([1, 0]);
-    expect(adjacentPositions).toContainEqual([1, 1]);
   });
 });

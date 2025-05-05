@@ -5,3 +5,5 @@ export type { TimerProps } from "./timerTypes";
 export type { WordListProps } from "./wordListTypes";
 export type { DieProps } from "./DieTypes";
 export type { MultipleWordLists, MultipleListWordScore } from "./scoringTypes";
+export type { GameConfigTypes } from "./GameConfigTypes";
+export type { PlayersType, Player } from "./PlayersType";
